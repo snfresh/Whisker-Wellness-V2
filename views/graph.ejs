@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= cat.name %>'s Weight Graph - Whisker Wellness</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <div class="container">
+    <h1><%= cat.name %>'s Weight Graph (Last 7 Days)</h1>
+    <canvas id="weightChart" width="400" height="200"></canvas>
+    <a href="/cats/<%= cat.id %>/weights">Back to Weights</a>
+    <a href="/cats">Back to Cats</a>
+  </div>
+
+  <script>
+    const ctx = document.getElementById('weightChart').getContext('2d');
+    const data = {
+      labels: [<% logs.forEach(log => { %>"<%= log.date %>",<% }); %>],
+      datasets: [{
+        label: 'Weight (lbs)',
+        data: [<% logs.forEach(log => { %><%= log.weight %>,<% }); %>],
+        borderColor: 'rgba(75, 192, 192, 1)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        tension: 0.1
+      }]
+    };
+    const config = {
+      type: 'line',
+      data: data,
+      options: {
+        scales: {
+          y: {
+            beginAtZero: false
+          }
+        }
+      }
+    };
+    new Chart(ctx, config);
+  </script>
+</body>
+</html>

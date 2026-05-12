@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Activities - Whisker Wellness</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Activity Planner for <%= cat.name %></h1>
+    <p>Breed: <%= cat.breed || 'Unknown' %></p>
+    <p>Age: <%= cat.age || 'Unknown' %></p>
+
+    <form action="/cats/<%= cat.id %>/activities" method="POST">
+      <h2>Select Toys You Already Have</h2>
+      <% availableToys.forEach((toy) => { %>
+        <label>
+          <input type="checkbox" name="toys" value="<%= toy %>" <%= ownedItems.includes(toy) ? 'checked' : '' %>>
+          <%= toy %>
+        </label>
+      <% }) %>
+      <label for="custom_toy">Custom toy:</label>
+      <input type="text" id="custom_toy" name="custom_toy" placeholder="Add another toy">
+      <button type="submit">Save Your Toys</button>
+    </form>
+
+    <h2>Owned Toys</h2>
+    <% if (ownedItems.length === 0) { %>
+      <p>No toys saved yet. Add the toys you already have to get personalized activities.</p>
+    <% } else { %>
+      <ul>
+        <% ownedItems.forEach((item) => { %>
+          <li><%= item %></li>
+        <% }) %>
+      </ul>
+    <% } %>
+
+    <h2>Recommended Activities</h2>
+    <ul>
+      <% suggestions.forEach((suggestion) => { %>
+        <li><%= suggestion %></li>
+      <% }) %>
+    </ul>
+
+    <a href="/cats" class="button">Back to Cats</a>
+  </div>
+</body>
+</html>

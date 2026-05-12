@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Breed Catalog - Whisker Wellness</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Breed Catalog</h1>
+    <form method="GET" action="/breeds">
+      <label for="q">Search for a breed:</label>
+      <input type="text" id="q" name="q" value="<%= query %>" placeholder="Breed name">
+      <button type="submit">Search</button>
+    </form>
+
+    <% if (breeds.length === 0) { %>
+      <p>No breeds found. Try a different name.</p>
+    <% } else { %>
+      <div class="cats-list" style="gap: 16px;">
+        <% breeds.forEach((breed) => { %>
+          <div class="cat-card">
+            <h3><%= breed.name %></h3>
+            <p>Weight range: <%= breed.min_weight %> - <%= breed.max_weight %> lbs</p>
+            <p>Activity: <%= breed.activity_level %></p>
+            <p>Grooming: <%= breed.grooming_needs %></p>
+            <p>Health notes: <%= breed.common_health_concerns %></p>
+            <p><%= breed.notes %></p>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+    <a href="/cats" class="button">Back to Cats</a>
+  </div>
+</body>
+</html>

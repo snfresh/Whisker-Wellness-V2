@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Top Deals - Whisker Wellness</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Top Deals for <%= cat.name %></h1>
+    <div class="products-grid">
+      <% ['feeding', 'playing', 'grooming'].forEach((category) => { %>
+        <% categories[category].forEach((item) => { %>
+          <div class="product-card">
+            <div class="product-info">
+              <h3><%= item.name %></h3>
+              <p class="price"><%= item.price %></p>
+              <p class="size"><%= item.size %></p>
+              <p class="reviews"><%= item.reviews %></p>
+              <a href="<%= item.placeholder_url %>" class="buy-button" target="_blank" rel="noreferrer">Buy Now</a>
+            </div>
+          </div>
+        <% }) %>
+      <% }) %>
+    </div>
+    <a href="/cats" class="button back-button">Back to Cats</a>
+  </div>
+</body>
+</html>

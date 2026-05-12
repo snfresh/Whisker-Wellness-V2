@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Feeding Plan - Whisker Wellness</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Feeding Recommendations for <%= cat.name %></h1>
+    <p>Breed: <%= cat.breed || 'Unknown' %></p>
+    <p>Age group: <%= ageGroup %></p>
+    <p>Recommended daily calories: <strong><%= calories %> kcal</strong></p>
+
+    <h2>Top Food Recommendations</h2>
+    <% if (recommendedFoods.length === 0) { %>
+      <p>No food matches available for this profile yet.</p>
+    <% } else { %>
+      <div class="cats-list" style="gap: 16px;">
+        <% recommendedFoods.forEach((food) => { %>
+          <div class="cat-card">
+            <h3><%= food.brand %> - <%= food.name %></h3>
+            <p>Category: <%= food.category %></p>
+            <p>Age group: <%= food.age_group %></p>
+            <p>Protein: <%= food.protein %>% | Fat: <%= food.fat %>%</p>
+            <p>Calories: <%= food.calories %> kcal per serving</p>
+            <p>Serving size: <%= food.serving_size %></p>
+            <p>Suggested servings per day: <%= food.recommended_servings %></p>
+            <a href="<%= food.placeholder_url %>" class="button" target="_blank" rel="noreferrer">Product Link</a>
+          </div>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <a href="/cats" class="button">Back to Cats</a>
+  </div>
+</body>
+</html>

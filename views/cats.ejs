@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Cats - Whisker Wellness</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Your Cats</h1>
+    <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-bottom:16px;">
+      <a href="/cats/add" class="button">Add New Cat</a>
+      <a href="/breeds" class="button">Browse Breed Catalog</a>
+    </div>
+    <div class="cats-list">
+      <% cats.forEach(cat => { %>
+        <div class="cat-card">
+          <% if (cat.image_url) { %>
+            <img src="<%= cat.image_url %>" alt="<%= cat.name %>">
+          <% } %>
+          <h3><%= cat.name %></h3>
+          <p>Breed: <%= cat.breed || 'Unknown' %></p>
+          <p>Age: <%= cat.age || 'Unknown' %></p>
+          <p>Starting Weight: <%= cat.starting_weight %> lbs</p>
+          <p>Target Weight: <%= cat.target_weight %> lbs</p>
+          <a href="/cats/<%= cat.id %>/weights" class="button">View Weights</a>
+          <a href="/cats/<%= cat.id %>/graph" class="button">View Graph</a>
+          <a href="/cats/<%= cat.id %>/feeding" class="button">Feeding Plan</a>
+          <a href="/cats/<%= cat.id %>/products" class="button">Products</a>
+          <a href="/cats/<%= cat.id %>/activities" class="button">Activities</a>
+          <a href="/cats/<%= cat.id %>/breed-info" class="button">Breed Info</a>
+          <a href="/cats/<%= cat.id %>/edit" class="button">Edit</a>
+          <form action="/cats/<%= cat.id %>/delete" method="POST" style="display:inline;">
+            <button type="submit" onclick="return confirm('Are you sure you want to delete this cat?')">Delete</button>
+          </form>
+        </div>
+      <% }); %>
+    </div>
+    <form action="/logout" method="POST" style="margin-top: 20px;">
+      <button type="submit">Logout</button>
+    </form>
+  </div>
+</body>
+</html>
